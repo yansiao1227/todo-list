@@ -3,7 +3,7 @@
     <h2>添加新任务</h2>
     <div class="form-group">
       <input
-        :value="newTodoTitle"
+        :value="newForm.title"
         @input="setFieldValue('title', $event.target.value)"
         type="text"
         placeholder="任务标题"
@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
       <textarea
-        :value="newTodoDescription"
+        :value="newForm.description"
         @input="setFieldValue('description', $event.target.value)"
         placeholder="任务描述（可选）"
         class="form-textarea"
@@ -23,7 +23,7 @@
       <div class="form-group form-half">
         <label>分类：</label>
         <select
-          :value="newTodoCategory"
+          :value="newForm.category"
           @input="setFieldValue('category', $event.target.value)"
           class="form-select"
         >
@@ -39,7 +39,7 @@
       <div class="form-group form-half">
         <label>优先级：</label>
         <select
-          :value="newTodoPriority"
+          :value="newForm.priority"
           @input="setFieldValue('priority', $event.target.value)"
           class="form-select"
         >
@@ -57,7 +57,7 @@
       <div class="form-group form-half">
         <label>截止日期：</label>
         <input
-          :value="newTodoDueDate"
+          :value="newForm.dueDate"
           @input="setFieldValue('dueDate', $event.target.value)"
           type="datetime-local"
           class="form-input"
@@ -66,7 +66,7 @@
       <div class="form-group form-half">
         <label>提醒：</label>
         <select
-          :value="newTodoReminder"
+          :value="newForm.reminder"
           @input="setFieldValue('reminder', $event.target.value)"
           class="form-select"
         >
@@ -101,28 +101,8 @@ import { reminderOptions } from "../hooks/useNotification";
 export default {
   name: "TodoForm",
   props: {
-    newTodoTitle: {
-      type: String,
-      required: true,
-    },
-    newTodoDescription: {
-      type: String,
-      required: true,
-    },
-    newTodoCategory: {
-      type: String,
-      required: true,
-    },
-    newTodoPriority: {
-      type: String,
-      required: true,
-    },
-    newTodoDueDate: {
-      type: String,
-      required: true,
-    },
-    newTodoReminder: {
-      type: Number,
+    newForm: {
+      type: Object,
       required: true,
     },
     notificationPermission: {

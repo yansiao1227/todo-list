@@ -23,32 +23,18 @@ export function useTodoManager() {
   const todos = ref([]);
 
   // 新任务表单数据
-  const newTodoTitle = ref("");
-  const newTodoDescription = ref("");
-  const newTodoCategory = ref("工作");
-  const newTodoPriority = ref("中");
-  const newTodoDueDate = ref("");
-  const newTodoReminder = ref(0); // 默认无提醒
+  const newForm = ref({
+    title: "",
+    description: "",
+    category: "工作",
+    priority: "中",
+    dueDate: "",
+    reminder: 0 // 默认无提醒
+  });
+  
   const setFieldValue = (field, value) => {
-    switch (field) {
-      case "title":
-        newTodoTitle.value = value;
-        break;
-      case "description":
-        newTodoDescription.value = value;
-        break;
-      case "category":
-        newTodoCategory.value = value;
-        break;
-      case "priority":
-        newTodoPriority.value = value;
-        break;
-      case "dueDate":
-        newTodoDueDate.value = value;
-        break;
-      case "reminder":
-        newTodoReminder.value = value;
-        break;
+    if (newForm.value.hasOwnProperty(field)) {
+      newForm.value[field] = value;
     }
   };
 
@@ -107,15 +93,15 @@ export function useTodoManager() {
 
   // 添加新任务
   function addTodo() {
-    if (newTodoTitle.value.trim() !== "") {
+    if (newForm.value.title.trim() !== "") {
       todos.value.push({
         id: Date.now(),
-        title: newTodoTitle.value.trim(),
-        description: newTodoDescription.value.trim() || "无描述",
-        category: newTodoCategory.value,
-        priority: newTodoPriority.value,
-        dueDate: newTodoDueDate.value || null,
-        reminder: newTodoReminder.value || 0,
+        title: newForm.value.title.trim(),
+        description: newForm.value.description.trim() || "无描述",
+        category: newForm.value.category,
+        priority: newForm.value.priority,
+        dueDate: newForm.value.dueDate || null,
+        reminder: newForm.value.reminder || 0,
         notified: false,
         completed: false,
       });
@@ -126,10 +112,10 @@ export function useTodoManager() {
 
   // 重置表单
   function resetForm() {
-    newTodoTitle.value = "";
-    newTodoDescription.value = "";
-    newTodoDueDate.value = "";
-    newTodoReminder.value = 0;
+    newForm.value.title = "";
+    newForm.value.description = "";
+    newForm.value.dueDate = "";
+    newForm.value.reminder = 0;
   }
 
   // 显示任务详情
@@ -225,12 +211,7 @@ export function useTodoManager() {
     todos,
     selectedCategory,
     sortBy,
-    newTodoTitle,
-    newTodoDescription,
-    newTodoCategory,
-    newTodoPriority,
-    newTodoDueDate,
-    newTodoReminder,
+    newForm,
     selectedTodo,
     filteredAndSortedTodos,
     remainingCount,

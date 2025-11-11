@@ -11,12 +11,7 @@ const {
   todos,
   selectedCategory,
   sortBy,
-  newTodoTitle,
-  newTodoDescription,
-  newTodoCategory,
-  newTodoPriority,
-  newTodoDueDate,
-  newTodoReminder,
+  newForm,
   selectedTodo,
   filteredAndSortedTodos,
   remainingCount,
@@ -41,12 +36,7 @@ const { notificationPermission, requestNotificationPermission } =
     <main>
       <!-- 添加任务表单 -->
       <TodoForm
-        :newTodoTitle="newTodoTitle"
-        :newTodoDescription="newTodoDescription"
-        :newTodoCategory="newTodoCategory"
-        :newTodoPriority="newTodoPriority"
-        :newTodoDueDate="newTodoDueDate"
-        :newTodoReminder="newTodoReminder"
+        :newForm="newForm"
         :notificationPermission="notificationPermission"
         @add-todo="addTodo"
         @set-field-value="setFieldValue"
