@@ -274,6 +274,10 @@ label {
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
+    gap: 0px;
+  }
+  label {
+    width: 120px;
   }
 
   .form-actions {

@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-details">
+  <div class="todo-details" :class="{ show: todo }">
     <div v-if="todo" class="details-content">
       <div class="details-header">
         <h2>任务详情</h2>
@@ -392,6 +392,11 @@ export default {
     bottom: 0;
     z-index: 1000;
     border-radius: 0;
+    display: none; /* 默认隐藏 */
+  }
+  
+  .todo-details.show {
+    display: block; /* 只有当选中任务时才显示 */
   }
 
   .detail-meta {
