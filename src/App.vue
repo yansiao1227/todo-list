@@ -17,6 +17,7 @@ const {
   remainingCount,
   addTodo,
   setFieldValue,
+  resetForm,
   showTodoDetails,
   toggleTodo,
   deleteTodo,
@@ -38,6 +39,7 @@ const { notificationPermission, requestNotificationPermission } =
       <TodoForm
         :newForm="newForm"
         :notificationPermission="notificationPermission"
+        @reset-form="resetForm"
         @add-todo="addTodo"
         @set-field-value="setFieldValue"
         @request-permission="requestNotificationPermission"
