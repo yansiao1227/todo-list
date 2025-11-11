@@ -81,7 +81,13 @@
       </div>
     </div>
     <div class="form-actions">
-      <button @click="handleAddTodo" class="btn btn-primary">添加任务</button>
+      <button
+        @click="handleAddTodo"
+        class="btn btn-primary"
+        :disabled="isDisabled"
+      >
+        添加任务
+      </button>
       <button @click="resetForm" class="btn btn-secondary">重置</button>
       <button
         v-if="notificationPermission !== 'granted'"
@@ -97,6 +103,7 @@
 <script>
 import { categories, priorities } from "../hooks/useTodoManager";
 import { reminderOptions } from "../hooks/useNotification";
+import { computed } from "vue";
 
 export default {
   name: "TodoForm",
@@ -112,6 +119,10 @@ export default {
   },
   emits: ["add-todo", "reset-form", "request-permission", "set-field-value"],
   setup(props, { emit }) {
+    const isDisabled = computed(() => {
+      return !props.newForm.title.trim();
+    });
+
     const setFieldValue = (field, value) => {
       emit("set-field-value", field, value);
     };
@@ -129,6 +140,7 @@ export default {
     };
 
     return {
+      isDisabled,
       categories,
       priorities,
       reminderOptions,
