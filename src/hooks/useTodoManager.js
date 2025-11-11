@@ -128,6 +128,10 @@ export function useTodoManager() {
     const todo = todos.value.find((todo) => todo.id === id);
     if (todo) {
       todo.completed = !todo.completed;
+      // 当任务标记为已完成时，设置notified为true，防止已完成任务触发提醒
+      if (todo.completed) {
+        todo.notified = true;
+      }
     }
   }
 
